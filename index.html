@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soheil Sayah Varg</title>
+<meta name="description" content="Computer Engineering undergraduate at Sharif University of Technology. Inference and approximation under uncertainty — sampling for language models and offline reinforcement learning.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>∫</text></svg>">
+<style>
+  :root {
+    --bg: #fdfdfc;
+    --fg: #1a1a18;
+    --muted: #6b6b66;
+    --rule: #e3e3df;
+    --accent: #7a3b2e;
+    --card: #f6f6f3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14141a;
+      --fg: #e8e8e4;
+      --muted: #9a9a94;
+      --rule: #2c2c34;
+      --accent: #d99a86;
+      --card: #1c1c23;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-feature-settings: "kern" 1;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover { border-bottom-color: var(--accent); }
+
+  header h1 {
+    font-size: 2rem; line-height: 1.15; margin: 0 0 .35rem;
+    letter-spacing: -.02em; font-weight: 650;
+  }
+  .sub { color: var(--muted); margin: 0 0 1.1rem; }
+  .links { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; font-size: .93rem; margin-bottom: 2.6rem; }
+
+  .lede { font-size: 1.08rem; margin: 0 0 2.8rem; }
+
+  h2 {
+    font-size: .78rem; text-transform: uppercase; letter-spacing: .1em;
+    color: var(--muted); font-weight: 600;
+    margin: 0 0 1.1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--rule);
+  }
+  section { margin-bottom: 2.8rem; }
+
+  .item { margin-bottom: 1.5rem; }
+  .item:last-child { margin-bottom: 0; }
+  .item h3 { font-size: 1rem; font-weight: 620; margin: 0 0 .15rem; }
+  .meta { font-size: .87rem; color: var(--muted); margin: 0 0 .4rem; }
+  .item p { margin: 0; }
+
+  .grid { display: grid; gap: .9rem; }
+  .proj {
+    background: var(--card); border: 1px solid var(--rule);
+    border-radius: 8px; padding: .85rem 1rem;
+  }
+  .proj h3 { margin: 0 0 .2rem; font-size: .96rem; }
+  .proj p { margin: 0; font-size: .92rem; color: var(--muted); }
+
+  .note {
+    font-size: .9rem; color: var(--muted);
+    border-left: 2px solid var(--rule); padding-left: .9rem; margin: 0;
+  }
+
+  footer {
+    margin-top: 3.5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+    font-size: .88rem; color: var(--muted);
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding-top: 2.5rem; }
+    header h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Soheil Sayah Varg</h1>
+    <p class="sub">B.Sc. Computer Engineering, Sharif University of Technology — Tehran, Iran</p>
+    <nav class="links">
+      <a href="mailto:soheilsayahvarg@gmail.com">soheilsayahvarg@gmail.com</a>
+      <a href="https://github.com/soheilsayahvarg">GitHub</a>
+      <a href="https://www.linkedin.com/in/soheil-sayah-varg-3236b228a/">LinkedIn</a>
+      <a href="CV.pdf">CV (PDF)</a>
+    </nav>
+  </header>
+
+  <p class="lede">
+    I work on <strong>inference and approximation under uncertainty</strong>: when the thing
+    you care about cannot be computed exactly — a posterior, a value function, an expectation
+    over an intractable distribution — you compute an approximation instead, and the question
+    that interests me is what licenses trusting it.
+  </p>
+
+  <section>
+    <h2>Research</h2>
+
+    <div class="item">
+      <h3>Exact controlled generation from tilted autoregressive targets</h3>
+      <p class="meta">Digital Media Lab, Sharif University of Technology · December 2025 – present<br>
+      Supervised by Dr. Ali Rostami, in Prof. Hamid R. Rabiee's group</p>
+      <p>
+        Steering a language model toward a reward implicitly defines a tilted target
+        distribution, and the samplers used in practice do not draw from it — they draw from
+        something nearby, and the gap is rarely measured. This work samples from the tilted
+        target exactly in distribution, so the remaining cost is compute rather than a silent
+        bias. Manuscript in preparation.
+      </p>
+    </div>
+
+    <div class="item">
+      <h3>Model-based reinforcement learning in confounded POMDPs</h3>
+      <p class="meta">Sharif University of Technology · February 2026 – present · team of three</p>
+      <p>
+        An empirical implementation of a theory-only ICML 2024 result: bridge functions
+        identified from negative-control proxies, verified against an analytic oracle to
+        machine precision, then extended to continuous state and action with a kernel backend.
+        At full benchmark scale the confounding-blind baseline beat the corrected estimator in
+        every cell of the sweep — identification is not estimation. I read the anchor papers
+        and drove the implementation.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Selected projects</h2>
+    <div class="grid">
+      <div class="proj">
+        <h3><a href="https://github.com/soheilsayahvarg/modern-information-retrieval">modern-information-retrieval</a></h3>
+        <p>A search engine built from scratch, then embeddings and BERT fine-tuning, then a hybrid dense + sparse multimodal system with cross-encoder reranking.</p>
+      </div>
+      <div class="proj">
+        <h3><a href="https://github.com/soheilsayahvarg/market-predictability-study">market-predictability-study</a></h3>
+        <p>A backtest of mine returned several hundred percent. This is the study of whether any of the reasons I gave for it hold up. They do not.</p>
+      </div>
+      <div class="proj">
+        <h3><a href="https://github.com/soheilsayahvarg/convex-optimization-algorithms">convex-optimization-algorithms</a></h3>
+        <p>Chambolle-Pock and ADMM written from their update rules, checked against a solver rather than delegated to one.</p>
+      </div>
+      <div class="proj">
+        <h3><a href="https://github.com/soheilsayahvarg/segmentation-and-deep-rl">segmentation-and-deep-rl</a></h3>
+        <p>Attention U-Net variants for segmentation, and Soft Actor-Critic built from scratch in PyTorch.</p>
+      </div>
+      <div class="proj">
+        <h3><a href="https://github.com/soheilsayahvarg/imdb-postgresql-optimization">imdb-postgresql-optimization</a></h3>
+        <p>A <code>SKIP LOCKED</code> message queue feeding ~190M IMDb rows into PostgreSQL, then eight queries indexed with real before/after measurements. One index made its query slower; that is in the report too.</p>
+      </div>
+      <div class="proj">
+        <h3><a href="https://github.com/soheilsayahvarg/neogit">neogit</a></h3>
+        <p>A version control system in C. Staging, commits, branches, merge, tags, pre-commit hooks. No libraries.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Teaching</h2>
+    <div class="item">
+      <h3>Teaching Assistant, Sharif University of Technology</h3>
+      <p class="meta">2024 – 2026 · nine course-semesters across five terms</p>
+      <p>
+        Head TA for Signals &amp; Systems (Dr. Manzuri). Also Stochastic Processes and
+        Probability &amp; Statistics (Dr. Najafi), Machine Learning (Dr. Sharifi-Zarchi), Data
+        Structures &amp; Algorithms (Dr. Abam), and Linear Algebra (Dr. Rabiee &amp; Dr. Ramezani).
+      </p>
+    </div>
+    <div class="item">
+      <h3>Co-founder, <a href="https://resonanceoly.ir">Resonance</a></h3>
+      <p class="meta">August 2023 – present</p>
+      <p>
+        An online Physics Olympiad school, started as a small study group, for students who
+        have no selective high school near them. I teach the mechanics, electromagnetics and
+        laboratory tracks and write problem sets for the national selection rounds.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Education and honors</h2>
+    <div class="item">
+      <h3>B.Sc. Computer Engineering, Sharif University of Technology</h3>
+      <p class="meta">September 2023 – July 2027 (expected)</p>
+      <p>
+        GPA 19.38 / 20.0, ranked 15th of 183 — the departmental average for this cohort is
+        17.24. Stochastic Processes and Reinforcement Learning taken as graduate courses.
+      </p>
+    </div>
+    <div class="item">
+      <h3>Gold Medal, Iranian National Physics Olympiad (2023)</h3>
+      <p>
+        7th nationwide among more than 10,000 participants, and 2nd nationwide in the
+        experimental examination. Admitted to Sharif through the olympiad medalist track.
+      </p>
+    </div>
+    <div class="item">
+      <h3>Juror, 13th Persian Young Naturalists' Tournament (2025)</h3>
+      <p>
+        An IYPT-format research tournament under the World Federation of Physics Competitions.
+        Judged team defenses of open-ended physics research problems.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Reach me at <a href="mailto:soheilsayahvarg@gmail.com">soheilsayahvarg@gmail.com</a>. I am
+    applying to PhD programs for entry in autumn 2027 and am glad to talk about any of the work above.</p>
+  </footer>
+
+</div>
+</body>
+</html>
