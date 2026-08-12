@@ -26,7 +26,9 @@
     /* every neutral is tinted toward the same green-gold family — no pure greys */
     --bg:hsl(60 22% 96%); --bg2:hsl(75 18% 91%); --card:hsl(60 33% 98%);
     --fg:hsl(120 9% 10%); --muted:hsl(120 6% 36%); --faint:hsl(115 7% 57%);
+    --body:hsl(120 8% 24%);
     --rule:hsl(80 16% 86%); --hair:hsl(70 18% 90%);
+    --chip:hsl(75 20% 93%);
     --accent:hsl(148 36% 26%); --accent-soft:hsl(148 27% 44%);
     --sh-1:0 1px 2px hsl(120 12% 20% / .06), 0 8px 22px -14px hsl(120 12% 20% / .22);
     --sh-2:0 2px 5px hsl(120 12% 20% / .08), 0 22px 44px -20px hsl(120 12% 20% / .28);
@@ -37,7 +39,9 @@
     :root:not([data-theme="light"]){
       --bg:hsl(232 27% 8%); --bg2:hsl(234 24% 13%); --card:hsl(234 23% 12%);
       --fg:hsl(228 27% 92%); --muted:hsl(230 13% 66%); --faint:hsl(230 11% 46%);
+      --body:hsl(228 19% 84%);
       --rule:hsl(233 21% 20%); --hair:hsl(233 20% 17%);
+      --chip:hsl(234 24% 17%);
       --accent:hsl(258 78% 78%); --accent-soft:hsl(250 48% 62%);
       --sh-1:0 1px 2px hsl(233 40% 2% / .55), 0 10px 26px -16px hsl(233 40% 2% / .9);
       --sh-2:0 2px 8px hsl(233 40% 2% / .65), 0 26px 52px -22px hsl(233 40% 2% / .95);
@@ -48,7 +52,9 @@
   :root[data-theme="dark"]{
     --bg:hsl(232 27% 8%); --bg2:hsl(234 24% 13%); --card:hsl(234 23% 12%);
     --fg:hsl(228 27% 92%); --muted:hsl(230 13% 66%); --faint:hsl(230 11% 46%);
+    --body:hsl(228 19% 84%);
     --rule:hsl(233 21% 20%); --hair:hsl(233 20% 17%);
+    --chip:hsl(234 24% 17%);
     --accent:hsl(258 78% 78%); --accent-soft:hsl(250 48% 62%);
     --sh-1:0 1px 2px hsl(233 40% 2% / .55), 0 10px 26px -16px hsl(233 40% 2% / .9);
     --sh-2:0 2px 8px hsl(233 40% 2% / .65), 0 26px 52px -22px hsl(233 40% 2% / .95);
@@ -182,10 +188,10 @@
   .yr{color:var(--faint);font-weight:300;font-size:.88em}
 
   /* ── project cards ──────────────────────────────────── */
-  .grid{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(19.5rem,1fr))}
+  .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(20.5rem,1fr))}
   .proj{
     position:relative;background:var(--card);border:1px solid var(--rule);
-    border-radius:13px;padding:1.15rem 1.25rem 1.2rem;box-shadow:var(--sh-1);
+    border-radius:13px;padding:1.3rem 1.4rem 1.35rem;box-shadow:var(--sh-1);
     transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s,border-color .22s
   }
   .proj::before{
@@ -197,15 +203,25 @@
   }
   .proj:hover{transform:translateY(-3px);box-shadow:var(--sh-2)}
   .proj:hover::before{opacity:1}
-  .proj h3{margin:0 0 .42rem;font-size:.9rem}
+  .proj h3{margin:0 0 .55rem;font-size:.9rem;font-weight:600;line-height:1.35}
   .proj h3 a{
     font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
-    font-size:.845rem;letter-spacing:-.02em
+    font-size:.815rem;font-weight:600;letter-spacing:-.012em;
+    /* wrap long repo names at the hyphens instead of overflowing */
+    word-break:break-word
   }
-  .proj p{margin:0;font-size:.945rem;line-height:1.6;color:var(--muted);font-weight:300}
+  /* body copy is sans here, not the page serif: at this size a 300-weight
+     serif in a muted grey is the least readable text on the page */
+  .proj p{
+    margin:0;
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:.855rem;line-height:1.68;font-weight:400;
+    color:var(--body);letter-spacing:-.003em
+  }
   .proj code{
-    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85em;
-    background:var(--bg2);padding:.06em .34em;border-radius:4px
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--chip);border:1px solid var(--hair);
+    padding:.08em .36em;border-radius:4px;white-space:nowrap
   }
 
   /* ── footer ─────────────────────────────────────────── */
@@ -319,12 +335,12 @@
         <p>Attention U-Net variants for segmentation, and Soft Actor-Critic built from scratch in PyTorch.</p>
       </div>
       <div class="proj">
-        <h3><a href="https://github.com/soheilsayahvarg/imdb-postgresql-optimization">imdb-postgresql-optimization</a></h3>
-        <p>A <code>SKIP LOCKED</code> message queue feeding ~190M IMDb rows into PostgreSQL, then eight queries indexed with real before/after measurements. One index made its query slower; that is in the report too.</p>
+        <h3><a href="https://github.com/soheilsayahvarg/neogit">neogit</a></h3>
+        <p>A version control system written from scratch in C — staging, commits, branches, checkout, revert, tags, and a pre-commit hook framework. No libraries.</p>
       </div>
       <div class="proj">
-        <h3><a href="https://github.com/soheilsayahvarg/neogit">neogit</a></h3>
-        <p>A version control system in C. Staging, commits, branches, merge, tags, pre-commit hooks. No libraries.</p>
+        <h3><a href="https://github.com/soheilsayahvarg/imdb-postgresql-optimization">imdb-postgresql-optimization</a></h3>
+        <p>A <code>SKIP LOCKED</code> message queue feeding ~190M IMDb rows into PostgreSQL, then eight queries indexed with real before/after measurements. One index made its query slower; that is in the report too.</p>
       </div>
     </div>
   </section>
