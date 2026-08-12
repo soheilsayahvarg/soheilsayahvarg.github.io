@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palette options — pick one</title>
+<meta name="robots" content="noindex">
+<style>
+  @font-face{font-family:'Newsreader';font-style:normal;font-weight:300 600;font-display:swap;
+             src:url(fonts/newsreader-normal.woff2) format('woff2');}
+  @font-face{font-family:'Inter';font-style:normal;font-weight:400 600;font-display:swap;
+             src:url(fonts/inter-normal.woff2) format('woff2');}
+
+  /* ── A · Petrol on bone (currently live) ───────────── */
+  .A.l{--bg:#f7f5f0;--bg2:#eae6dd;--fg:#15181c;--muted:#5e656b;--faint:#949a9f;
+       --rule:#e0dbd1;--accent:#175c5c;--accent-soft:#3f8b86;--card:#fdfcf9}
+  .A.d{--bg:#0d1013;--bg2:#151b1f;--fg:#eae8e3;--muted:#98a0a5;--faint:#697077;
+       --rule:#222931;--accent:#77c9c0;--accent-soft:#47948e;--card:#141a1e}
+
+  /* ── B · Oxblood on parchment ──────────────────────── */
+  .B.l{--bg:#f8f5f0;--bg2:#efe8de;--fg:#1a1614;--muted:#655d57;--faint:#9a9089;
+       --rule:#e5dcd0;--accent:#7c2d3a;--accent-soft:#a95560;--card:#fffdf9}
+  .B.d{--bg:#120f10;--bg2:#1c1719;--fg:#efe9e5;--muted:#a49992;--faint:#736861;
+       --rule:#2a2224;--accent:#e08a95;--accent-soft:#a85f6a;--card:#191416}
+
+  /* ── C · Forest on linen ───────────────────────────── */
+  .C.l{--bg:#f6f6f1;--bg2:#e8e9e0;--fg:#161915;--muted:#5d635a;--faint:#93998f;
+       --rule:#dde0d4;--accent:#2b5c3a;--accent-soft:#5b8f68;--card:#fcfdf9}
+  .C.d{--bg:#0d100d;--bg2:#151a15;--fg:#e9ebe5;--muted:#98a094;--faint:#6a7268;
+       --rule:#212a22;--accent:#87c99a;--accent-soft:#548c66;--card:#141915}
+
+  /* ── D · Ink and brass ─────────────────────────────── */
+  .D.l{--bg:#f6f4ef;--bg2:#e9e5da;--fg:#12161f;--muted:#5a616d;--faint:#8f95a1;
+       --rule:#ded9cc;--accent:#8a6520;--accent-soft:#b8934f;--card:#fdfbf6}
+  .D.d{--bg:#0b0d13;--bg2:#12161f;--fg:#ece9e2;--muted:#969ba8;--faint:#666c79;
+       --rule:#1f2531;--accent:#d9ae62;--accent-soft:#a37f42;--card:#11151d}
+
+  *{box-sizing:border-box}
+  body{margin:0;background:#e9e9e6;font:400 16px/1.6 Inter,system-ui,sans-serif;color:#333}
+  @media (prefers-color-scheme:dark){body{background:#1a1a1c;color:#bbb}}
+  .page{max-width:74rem;margin:0 auto;padding:2.5rem 1.2rem 5rem}
+  .page > h1{font:600 1.15rem/1.3 Inter,system-ui,sans-serif;margin:0 0 .3rem}
+  .page > p.hint{margin:0 0 2.2rem;font-size:.86rem;opacity:.7}
+  .label{font:600 .74rem/1 Inter,system-ui,sans-serif;letter-spacing:.13em;
+         text-transform:uppercase;margin:2.2rem 0 .7rem;opacity:.65}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+  @media(max-width:780px){.pair{grid-template-columns:1fr}}
+
+  .spec{
+    background:var(--bg);color:var(--fg);border-radius:14px;padding:1.8rem 1.7rem;
+    font-family:Newsreader,Georgia,serif;font-size:16px;line-height:1.7;
+    box-shadow:0 10px 30px -18px rgba(0,0,0,.4);overflow:hidden;position:relative
+  }
+  .spec::after{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
+  }
+  .spec.d::after{mix-blend-mode:overlay}
+  .spec h2{font:400 1.85rem/1.05 Newsreader,Georgia,serif;letter-spacing:-.028em;margin:0 0 .3rem}
+  .spec .sub{font:400 .84rem/1.5 Inter,system-ui,sans-serif;color:var(--muted);margin:0 0 1rem}
+  .chips{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.3rem}
+  .chips span{
+    font:400 .76rem/1 Inter,system-ui,sans-serif;padding:.34rem .74rem;
+    border:1px solid var(--rule);border-radius:999px;color:var(--muted);background:var(--card)
+  }
+  .lede{font-size:1.06rem;line-height:1.55;font-weight:300;letter-spacing:-.011em;
+        margin:0 0 1.4rem;padding-left:1.1rem;position:relative}
+  .lede::before{content:"";position:absolute;left:0;top:.35em;bottom:.3em;width:2px;
+                background:linear-gradient(180deg,var(--accent),transparent)}
+  .lede em{font-style:normal;color:var(--accent);font-weight:400}
+  .h3{font:500 .68rem/1 Inter,system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;
+      color:var(--faint);display:flex;align-items:center;gap:.9rem;margin:0 0 .9rem}
+  .h3 .num{color:var(--accent)}
+  .h3::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--rule),transparent)}
+  .card{background:var(--card);border:1px solid var(--rule);border-radius:12px;
+        padding:.95rem 1.1rem;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+  .card a{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.84rem;
+          color:var(--accent);text-decoration:none}
+  .card p{margin:.35rem 0 0;font-size:.92rem;color:var(--muted);font-weight:300;line-height:1.55}
+  .sw{display:flex;gap:.3rem;margin-top:1.2rem}
+  .sw i{width:26px;height:26px;border-radius:6px;border:1px solid var(--rule);display:block}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Four palettes — tell me the letter</h1>
+  <p class="hint">Left column is light mode, right is dark. Everything else about the page stays exactly as it is; only the colours change.</p>
+
+  <div class="label">A · Petrol on bone <span style="opacity:.6">— currently live</span></div>
+  <div class="pair A">
+    <div class="spec l">
+      <h2>Soheil Sayah Varg</h2>
+      <p class="sub">B.Sc. Computer Engineering, Sharif University of Technology</p>
+      <div class="chips"><span>Email</span><span>CV</span><span>GitHub</span><span>LinkedIn</span></div>
+      <p class="lede">I work on <em>inference and approximation under uncertainty</em>: when the thing you care about cannot be computed exactly, what licenses trusting the approximation.</p>
+      <div class="h3"><span class="num">02</span>Selected projects</div>
+      <div class="card"><a>market-predictability-study</a><p>A backtest of mine returned several hundred percent. This is the study of whether any of the reasons I gave for it hold up.</p></div>
+      <div class="sw"><i style="background:var(--accent)"></i><i style="background:var(--accent-soft)"></i><i style="background:var(--bg2)"></i><i style="background:var(--fg)"></i></div>
+    </div>
+    <div class="spec d">
+      <h2>Soheil Sayah Varg</h2>
+      <p class="sub">B.Sc. Computer Engineering, Sharif University of Technology</p>
+      <div class="chips"><span>Email</span><span>CV</span><span>GitHub</span><span>LinkedIn</span></div>
+      <p class="lede">I work on <em>inference and approximation under uncertainty</em>: when the thing you care about cannot be computed exactly, what licenses trusting the approximation.</p>
+      <div class="h3"><span class="num">02</span>Selected projects</div>
+      <div class="card"><a>market-predictability-study</a><p>A backtest of mine returned several hundred percent. This is the study of whether any of the reasons I gave for it hold up.</p></div>
+      <div class="sw"><i style="background:var(--accent)"></i><i style="background:var(--accent-soft)"></i><i style="background:var(--bg2)"></i><i style="background:var(--fg)"></i></div>
+    </div>
+  </div>
+
+  <div class="label">B · Oxblood on parchment</div>
+  <div class="pair B">
+    <div class="spec l">
+      <h2>Soheil Sayah Varg</h2>
+      <p class="sub">B.Sc. Computer Engineering, Sharif University of Technology</p>
+      <div class="chips"><span>Email</span><span>CV</span><span>GitHub</span><span>LinkedIn</span></div>
+      <p class="lede">I work on <em>inference and approximation under uncertainty</em>: when the thing you care about cannot be computed exactly, what licenses trusting the approximation.</p>
+      <div class="h3"><span class="num">02</span>Selected projects</div>
+      <div class="card"><a>market-predictability-study</a><p>A backtest of mine returned several hundred percent. This is the study of whether any of the reasons I gave for it hold up.</p></div>
+      <div class="sw"><i style="background:var(--accent)"></i><i style="background:var(--accent-soft)"></i><i style="background:var(--bg2)"></i><i style="background:var(--fg)"></i></div>
+    </div>
+    <div class="spec d">
+      <h2>Soheil Sayah Varg</h2>
+      <p class="sub">B.Sc. Computer Engineering, Sharif University of Technology</p>
+      <div class="chips"><span>Email</span><span>CV</span><span>GitHub</span><span>LinkedIn</span></div>
+      <p class="lede">I work on <em>inference and approximation under uncertainty</em>: when the thing you care about cannot be computed exactly, what licenses trusting the approximation.</p>
+      <div class="h3"><span class="num">02</span>Selected projects</div>
+      <div class="card"><a>market-predictability-study</a><p>A backtest of mine returned several hundred percent. This is the study of whether any of the reasons I gave for it hold up.</p></div>
+      <div class="sw"><i style="background:var(--accent)"></i><i style="background:var(--accent-soft)"></i><i style="background:var(--bg2)"></i><i style="background:var(--fg)"></i></div>
+    </div>
+  </div>
+
+  <div class="label">C · Forest on linen</div>
+  <div class="pair C">
+    <div class="spec l">
+      <h2>Soheil Sayah Varg</h2>
+      <p class="sub">B.Sc. Computer Engineering, Sharif University of Technology</p>
+      <div class="chips"><span>Email</span><span>CV</span><span>GitHub</span><span>LinkedIn</span></div>
+      <p class="lede">I work on <em>inference and approximation under uncertainty</em>: when the thing you care about cannot be computed exactly, what licenses trusting the approximation.</p>
+      <div class="h3"><span class="num">02</span>Selected projects</div>
+      <div class="card"><a>market-predictability-study</a><p>A backtest of mine returned several hundred percent. This is the study of whether any of the reasons I gave for it hold up.</p></div>
+      <div class="sw"><i style="background:var(--accent)"></i><i style="background:var(--accent-soft)"></i><i style="background:var(--bg2)"></i><i style="background:var(--fg)"></i></div>
+    </div>
+    <div class="spec d">
+      <h2>Soheil Sayah Varg</h2>
+      <p class="sub">B.Sc. Computer Engineering, Sharif University of Technology</p>
+      <div class="chips"><span>Email</span><span>CV</span><span>GitHub</span><span>LinkedIn</span></div>
+      <p class="lede">I work on <em>inference and approximation under uncertainty</em>: when the thing you care about cannot be computed exactly, what licenses trusting the approximation.</p>
+      <div class="h3"><span class="num">02</span>Selected projects</div>
+      <div class="card"><a>market-predictability-study</a><p>A backtest of mine returned several hundred percent. This is the study of whether any of the reasons I gave for it hold up.</p></div>
+      <div class="sw"><i style="background:var(--accent)"></i><i style="background:var(--accent-soft)"></i><i style="background:var(--bg2)"></i><i style="background:var(--fg)"></i></div>
+    </div>
+  </div>
+
+  <div class="label">D · Ink and brass</div>
+  <div class="pair D">
+    <div class="spec l">
+      <h2>Soheil Sayah Varg</h2>
+      <p class="sub">B.Sc. Computer Engineering, Sharif University of Technology</p>
+      <div class="chips"><span>Email</span><span>CV</span><span>GitHub</span><span>LinkedIn</span></div>
+      <p class="lede">I work on <em>inference and approximation under uncertainty</em>: when the thing you care about cannot be computed exactly, what licenses trusting the approximation.</p>
+      <div class="h3"><span class="num">02</span>Selected projects</div>
+      <div class="card"><a>market-predictability-study</a><p>A backtest of mine returned several hundred percent. This is the study of whether any of the reasons I gave for it hold up.</p></div>
+      <div class="sw"><i style="background:var(--accent)"></i><i style="background:var(--accent-soft)"></i><i style="background:var(--bg2)"></i><i style="background:var(--fg)"></i></div>
+    </div>
+    <div class="spec d">
+      <h2>Soheil Sayah Varg</h2>
+      <p class="sub">B.Sc. Computer Engineering, Sharif University of Technology</p>
+      <div class="chips"><span>Email</span><span>CV</span><span>GitHub</span><span>LinkedIn</span></div>
+      <p class="lede">I work on <em>inference and approximation under uncertainty</em>: when the thing you care about cannot be computed exactly, what licenses trusting the approximation.</p>
+      <div class="h3"><span class="num">02</span>Selected projects</div>
+      <div class="card"><a>market-predictability-study</a><p>A backtest of mine returned several hundred percent. This is the study of whether any of the reasons I gave for it hold up.</p></div>
+      <div class="sw"><i style="background:var(--accent)"></i><i style="background:var(--accent-soft)"></i><i style="background:var(--bg2)"></i><i style="background:var(--fg)"></i></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
