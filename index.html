@@ -9,9 +9,10 @@
 <meta property="og:description" content="Inference and approximation under uncertainty — sampling for language models and offline reinforcement learning.">
 <meta property="og:image" content="https://soheilsayahvarg.github.io/photo.jpg">
 <meta property="og:url" content="https://soheilsayahvarg.github.io/">
-<meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0d1013" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f6f0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101410" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.92em' font-size='88'>∫</text></svg>">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 <link rel="preload" href="fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   @font-face{font-family:'Newsreader';font-style:normal;font-weight:300 600;font-display:swap;
@@ -20,24 +21,37 @@
              src:url(fonts/inter-normal.woff2) format('woff2');}
 
   :root{
-    --bg:#f7f5f0; --bg2:#eae6dd; --fg:#15181c; --muted:#5e656b; --faint:#949a9f;
-    --rule:#e0dbd1; --hair:#eae5db;
-    --accent:#175c5c; --accent-soft:#3f8b86;
-    --card:#fdfcf9;
-    --sh-1:0 1px 2px rgba(20,30,32,.05), 0 8px 22px -14px rgba(20,30,32,.22);
-    --sh-2:0 2px 5px rgba(20,30,32,.07), 0 22px 44px -20px rgba(20,30,32,.28);
-    --grain:.042; --grain-blend:multiply;
+    /* every neutral is tinted toward the same green-gold family — no pure greys */
+    --bg:hsl(60 22% 96%); --bg2:hsl(75 18% 91%); --card:hsl(60 33% 98%);
+    --fg:hsl(120 9% 10%); --muted:hsl(120 6% 36%); --faint:hsl(115 7% 57%);
+    --rule:hsl(80 16% 86%); --hair:hsl(70 18% 90%);
+    --accent:hsl(148 36% 26%); --accent-soft:hsl(148 27% 44%);
+    --sh-1:0 1px 2px hsl(120 12% 20% / .06), 0 8px 22px -14px hsl(120 12% 20% / .22);
+    --sh-2:0 2px 5px hsl(120 12% 20% / .08), 0 22px 44px -20px hsl(120 12% 20% / .28);
+    --grain:.04; --grain-blend:multiply;
+    --glow:.14;
   }
   @media (prefers-color-scheme:dark){
-    :root{
-      --bg:#0d1013; --bg2:#151b1f; --fg:#eae8e3; --muted:#98a0a5; --faint:#697077;
-      --rule:#222931; --hair:#1b2128;
-      --accent:#77c9c0; --accent-soft:#47948e;
-      --card:#141a1e;
-      --sh-1:0 1px 2px rgba(0,0,0,.5), 0 10px 26px -16px rgba(0,0,0,.85);
-      --sh-2:0 2px 8px rgba(0,0,0,.6), 0 26px 52px -22px rgba(0,0,0,.95);
-      --grain:.052; --grain-blend:overlay;
+    :root:not([data-theme="light"]){
+      --bg:hsl(130 13% 7%); --bg2:hsl(130 12% 11%); --card:hsl(132 11% 10%);
+      --fg:hsl(55 21% 90%); --muted:hsl(110 8% 63%); --faint:hsl(110 7% 43%);
+      --rule:hsl(130 11% 18%); --hair:hsl(130 10% 15%);
+      --accent:hsl(148 44% 66%); --accent-soft:hsl(148 30% 47%);
+      --sh-1:0 1px 2px hsl(130 30% 2% / .55), 0 10px 26px -16px hsl(130 30% 2% / .9);
+      --sh-2:0 2px 8px hsl(130 30% 2% / .65), 0 26px 52px -22px hsl(130 30% 2% / .95);
+      --grain:.055; --grain-blend:overlay;
+      --glow:.2;
     }
+  }
+  :root[data-theme="dark"]{
+    --bg:hsl(130 13% 7%); --bg2:hsl(130 12% 11%); --card:hsl(132 11% 10%);
+    --fg:hsl(55 21% 90%); --muted:hsl(110 8% 63%); --faint:hsl(110 7% 43%);
+    --rule:hsl(130 11% 18%); --hair:hsl(130 10% 15%);
+    --accent:hsl(148 44% 66%); --accent-soft:hsl(148 30% 47%);
+    --sh-1:0 1px 2px hsl(130 30% 2% / .55), 0 10px 26px -16px hsl(130 30% 2% / .9);
+    --sh-2:0 2px 8px hsl(130 30% 2% / .65), 0 26px 52px -22px hsl(130 30% 2% / .95);
+    --grain:.055; --grain-blend:overlay;
+    --glow:.2;
   }
 
   *{box-sizing:border-box}
@@ -70,6 +84,25 @@
     transition:transform .1s linear;
   }
 
+  #theme{
+    position:fixed;top:1.15rem;right:1.15rem;z-index:21;
+    width:36px;height:36px;padding:0;border-radius:50%;cursor:pointer;
+    border:1px solid var(--rule);background:var(--card);color:var(--muted);
+    display:grid;place-items:center;
+    box-shadow:var(--sh-1);
+    transition:color .18s,border-color .18s,transform .18s
+  }
+  #theme:hover{color:var(--accent);border-color:var(--accent-soft);transform:translateY(-1px)}
+  #theme svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;
+             stroke-linecap:round;stroke-linejoin:round}
+  #theme .moon{display:none}
+  :root[data-theme="dark"] #theme .moon{display:block}
+  :root[data-theme="dark"] #theme .sun{display:none}
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]) #theme .moon{display:block}
+    :root:not([data-theme="light"]) #theme .sun{display:none}
+  }
+
   .wrap{max-width:48rem;margin:0 auto;padding:5.5rem 1.7rem 7rem;position:relative;z-index:2}
 
   a{color:var(--accent);text-decoration:none}
@@ -82,7 +115,7 @@
   .portrait::before{
     content:"";position:absolute;inset:-9px;border-radius:50%;
     background:radial-gradient(circle at 32% 28%, var(--accent-soft), transparent 68%);
-    opacity:.16;filter:blur(11px)
+    opacity:var(--glow);filter:blur(12px)
   }
   .portrait img{
     position:relative;width:124px;height:124px;object-fit:cover;border-radius:50%;
@@ -203,6 +236,10 @@
 </head>
 <body>
 <div id="prog"></div>
+<button id="theme" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+  <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.4M12 19.2v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.4 12h2.4M19.2 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>
+  <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 1 1 9.4 3.5a6.9 6.9 0 0 0 11.1 11.1Z"/></svg>
+</button>
 <div class="wrap">
 
   <header class="rv">
@@ -348,6 +385,18 @@
 <script>
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // theme toggle — three states: OS default, forced light, forced dark
+  var root = document.documentElement;
+  document.getElementById('theme').addEventListener('click', function () {
+    var cur = root.getAttribute('data-theme');
+    if (!cur) {
+      cur = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
 
   // scroll progress hairline
   var bar = document.getElementById('prog');
