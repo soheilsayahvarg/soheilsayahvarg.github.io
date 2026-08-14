@@ -309,8 +309,11 @@
         identified from negative-control proxies, verified against an analytic oracle to
         machine precision, then extended to continuous state and action with a kernel backend.
         At full benchmark scale the confounding-blind baseline beat the corrected estimator in
-        every cell of the sweep — identification is not estimation. I read the anchor papers
-        and drove the implementation.
+        every cell of the sweep — identification is not estimation. The paper's pessimism step
+        also diverges numerically; auditing that, part of the magnitude turned out to be a
+        constraint our own implementation had dropped. The follow-on is a lower bound on the
+        pessimistic width that no choice of regularization schedule escapes. I read the anchor
+        papers and drove the implementation.
       </p>
     </div>
   </section>
@@ -352,8 +355,9 @@
       <p class="meta">2024 – 2026 · nine course-semesters across five terms</p>
       <p>
         Head TA for Signals &amp; Systems (Dr. Manzuri). Also Stochastic Processes and
-        Probability &amp; Statistics (Dr. Najafi), Machine Learning (Dr. Sharifi-Zarchi), Data
-        Structures &amp; Algorithms (Dr. Abam), and Linear Algebra (Dr. Rabiee &amp; Dr. Ramezani).
+        Probability &amp; Statistics (Dr. Najafi), Machine Learning and Probability &amp;
+        Statistics (Dr. Sharifi-Zarchi), Linear Algebra twice (Dr. Rabiee &amp; Dr. Ramezani),
+        and Data Structures &amp; Algorithms (Dr. Abam).
       </p>
     </div>
     <div class="item">
